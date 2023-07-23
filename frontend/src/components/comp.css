@@ -1,0 +1,94 @@
+
+:root {
+    --maincolor: #0080ff;
+    --mainlightcolor: #000099;
+    --activecolor: #ff0000;
+    --activeboxcolor: #c0c0c0;
+    --boxcolor: #ffffff;
+}
+
+.Nav{
+    background-color: white;
+    text-decoration: dashed;
+    position: fixed;
+    height:130px;
+    width: 100%;
+    align-items: center;
+    font-size: 30px;
+    background-color: aqua;
+    margin-top: 0px;
+    top:0;
+}
+
+.image{
+    height:60px;
+    width: 70px;
+    margin-right: 200px;
+    margin-left: 30px;
+    position: relative;
+    padding-top: 30px;
+    cursor: pointer;
+}
+
+.gear{
+    left :400px;
+    position: absolute;
+    vertical-align:baseline;
+    cursor: pointer;
+}
+
+.Nav a{
+    color:#0080ff;
+    background-color: rgb(0, 255, 255);
+    text-decoration: none;
+    padding-left: 2%;
+    padding-right: 2%;
+    position: relative;
+    height: 100%;
+}
+
+.Nav a:hover{
+    color:#ff0000;
+    text-decoration: underline;
+    background-color: #35e4e4;
+    align-content: center;
+    height: 100%;
+    position: relative;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.button{
+    height: 40px;
+    width: 90px;
+    font-size: 20px;
+    position: relative;
+    left: 450px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.content{
+    position: relative;
+    top: 120px;
+    z-index: -1;
+}
+
+.Card{
+    border-color: #ff0000;
+    border: 3px solid;
+    margin-top: 30px;
+    margin-bottom: 200px;
+    margin-left: 200px;
+    margin-right: 200px;
+    height: 1000px;
+    background-color: #f4eeee ;
+}
+
+.Name{
+    position: absolute;
+    top:15px;
+    right: 60px;
+    font-size: 18px;
+    font-weight: bold;
+}
