@@ -18,6 +18,7 @@
     background-color: aqua;
     margin-top: 0px;
     top:0;
+    z-index: 4;
 }
 
 .image{

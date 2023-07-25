@@ -12,7 +12,7 @@ function Home(){
         <header>
         <Navbar/>
         </header>
-        <body className="content">
+        <body className="content" style={{zIndex:2,position:'relative'}}>
         <Card className="Card">{d}</Card>
         </body>
         </div>
