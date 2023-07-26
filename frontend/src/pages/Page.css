@@ -32,3 +32,46 @@ a:hover{
 tr,td{
     height:50px;
 }
+
+.Modal_Back{
+    background-color: rgba(0,0,0,0.7);
+    position: fixed;
+    left: 200px;;
+    top:100px;
+    height: 700px;
+    width:1120px;
+     z-index: 5 ;
+}
+
+.Modal_Inner{
+    background-Color: white;
+    margin-Left: 100px;
+    margin-Top: 90px;
+    padding-top: 0px;
+    padding-left: 20px;
+    height: 400px;
+    width:800px;
+    z-index: 5;
+    position: absolute
+}
+
+#close{
+    float: right;
+    position: absolute;
+    right:10px;
+    top:10px;
+    font-size:xx-large;
+    cursor: pointer;
+    font-weight:bolder;
+}
+
+#close:hover{
+    text-decoration: none;
+}
+
+.Table{
+    width:100%;
+    height: 100%;
+}
+
+#add_button:hover{background-color: red;}
