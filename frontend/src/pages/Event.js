@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {DatePicker} from '@mantine/dates'
+import './Page.css'
+import { Card } from "@mantine/core";
 function Event()
 {
+    const [date,setDate]=useState(new Date())
+    useEffect(()=>{
+        console.log(date)
+    },[])
+
     return(
-        <h1>Its event page</h1>
+        <div>
+        <center>
+        <h1>EVENTS</h1>
+        <div>
+            <Card id='calendar' withBorder>
+        <DatePicker defaultValue={new Date()} onChange={setDate} allowDeselect hideOutsideDates/>
+        </Card>
+        </div>
+        </center>
+        <div id='Event_Display'> <h1>{date.toLocaleDateString()}</h1></div>
+        </div>
     )
 }
 

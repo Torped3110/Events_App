@@ -2,7 +2,8 @@ import Navbar from "../components/Navbar";
 import {Button, Card} from '@mantine/core'
 import { useEffect } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import './Page.css'
 function Home(){   
     const d= useSelector(state=>state.page)
     const e = useSelector(state=>state.login)
@@ -11,15 +12,13 @@ function Home(){
 
         if(!e)
         {
-           // not working
-           //console.log("if",e)
             navigate('/')
         }
             
     })
         if(e){
         return(
-            <div>
+            <div id='back'>
             <header>
             <Navbar/>
             </header>

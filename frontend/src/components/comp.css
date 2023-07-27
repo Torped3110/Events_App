@@ -93,3 +93,59 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+#login_back{
+    background-color: gray;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    background-image: url('panda.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+#login{
+    display: flex;
+    flex-direction: column;
+    height:500px;
+    width: 400px;
+    margin: 100px;
+    background-color: rgba(255,255,255,0.9);
+}
+
+.login_comp{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#click:hover{
+background-color: red;
+}
+
+#click_link:hover{
+    color: red;
+}
+
+#Register_back{
+    background-image: url(sloth.webp);
+    background-repeat: no-repeat;
+    background-size: cover ;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: max-content;
+}
+
+#Register_Card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    width:400px;
+    margin: 100px;
+    background-color:rgba(255,255,255,0.9)
+}
