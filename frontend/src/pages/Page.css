@@ -12,12 +12,12 @@
 }
 
 .corner_button{
-    position: absolute;
-    top: 20px;
+    position: absolute ;
     right: 30px;
     font-weight: bold;
     cursor: pointer;
     z-index: 2;
+    margin-top: 10px;
 }
 
 a{
@@ -102,4 +102,8 @@ tr,td{
     flex-direction: column;
     margin-top: 30px;
     height: 400px;
+}
+
+#Event_Back{
+    background-image: url(party.jpg);
 }

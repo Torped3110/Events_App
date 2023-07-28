@@ -20,7 +20,7 @@ function Navbar()
             <a onClick={()=>dispatch(Event())}>Events</a>
             <a onClick={()=>dispatch(Tasks())}>Tasks</a>
             <a onClick={()=>dispatch(Cart())}>Cart</a>
-            <a className="gear"><img src={settings}/></a>
+            <img id="gear" src={settings} onClick={()=>{}}/>
             <button className="button" onClick={()=>{dispatch(logout())
             navigate('/')
             }}>Log Out</button>

@@ -12,8 +12,9 @@
     text-decoration: dashed;
     position: fixed;
     height:130px;
+    display: inline-block;
+    flex-direction: row;
     width: 100%;
-    align-items: center;
     font-size: 30px;
     background-color: aqua;
     margin-top: 0px;
@@ -31,11 +32,22 @@
     cursor: pointer;
 }
 
-.gear{
-    left :400px;
+#gear{
     position: absolute;
+    right:200px;
+    top:58px;
     vertical-align:baseline;
     cursor: pointer;
+}
+
+#gear:hover{
+    border-radius: 20px;
+    background-color:#35e4e4;
+}
+
+#gear:active{
+    width:25px;
+    height: 25px;
 }
 
 .Nav a{
@@ -63,9 +75,9 @@
     height: 40px;
     width: 90px;
     font-size: 20px;
-    position: relative;
-    left: 450px;
-    bottom: 10px;
+    position: absolute;
+    right: 40px;
+    top:55px;
     cursor: pointer;
 }
 
