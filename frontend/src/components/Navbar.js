@@ -11,6 +11,7 @@ function Navbar()
 {
     const navigate=useNavigate()
     const dispatch = useDispatch()
+    const user=useSelector(state=>state.login)
     
 
     return(
@@ -24,7 +25,7 @@ function Navbar()
             <button className="button" onClick={()=>{dispatch(logout())
             navigate('/')
             }}>Log Out</button>
-            <Text className='Name'>Welcome abcdefgh!!</Text>
+            <Text className='Name'>Welcome {user.name}!!</Text>
         </header>
     )
 }

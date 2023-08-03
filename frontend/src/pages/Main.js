@@ -9,14 +9,13 @@ function Home(){
     const e = useSelector(state=>state.login)
     const navigate=useNavigate()
     useEffect( ()=>{
-
-        if(!e)
+        if(!e.signed)
         {
             navigate('/')
         }
             
     })
-        if(e){
+        if(e.signed){
         return(
             <div id='back'>
             <header>

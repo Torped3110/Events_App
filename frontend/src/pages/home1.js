@@ -1,9 +1,11 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 function Home()
 {
-    return(
-        <h1>This is home page</h1>
-    )
+const a=useSelector((state)=>state.login)
+return(
+    <h1>Hello {a.name}</h1>
+)
 }
 export default Home;

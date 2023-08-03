@@ -22,14 +22,14 @@ const Page_Reducer = (state=<Home/>, action) =>
     }
 }
 
-const Login_Reducer =(state=false,action)=>
+const Login_Reducer =(state={signed:false,user:'',name:''},action)=>
 {
     switch(action.type)
     {
         case 'Login':
-            return true
+            return({...state,signed:true,user:action.user,name:action.name})
         case 'Logout':
-            return false
+            return({...state,signed:false,user:'',name:''})
         default:
             return state
     }

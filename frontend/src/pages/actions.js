@@ -23,9 +23,11 @@ export const Cart = () => {
         type: 'Cart'
     }
 }
-export const login = ()=>{
+export const login = (email,first)=>{
     return{
-        type: 'Login'
+        type: 'Login',
+        user: email,
+        name:first
     }
 }
 

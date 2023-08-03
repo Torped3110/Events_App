@@ -3,15 +3,24 @@ import {DatePicker} from '@mantine/dates'
 import './Page.css'
 import { Avatar, Button, Card, Select, TextInput } from "@mantine/core";
 import Modal_Control from "./Modal_Control";
+import axios from "axios";
+import {useSelector} from 'react-redux'
+
 function Event()
 {
+    const user = useSelector(state=>state.login)
+    const [name,setName]=useState('')
+    const [frequency,setFrequency]=useState('Once')
     const [date,setDate]=useState(new Date())
     useEffect(()=>{
-        console.log(date)
-    },[])
+        axios.post('http://localhost:9000/allevents',{email:user.user,date,day:date.getDate(),month:date.getMonth()})
+        .then((res)=>console.log(res.data))
+        .catch((e)=>console.log('error',e))
+    },[date])
 
     function modal()
     {
+        
         return(
             <center>
             <div>
@@ -22,15 +31,23 @@ function Event()
                 </tr>
                 <tr>
                     <td>
-                    <TextInput placeholder="Name" label='Name of Event' id="Name" withAsterisk />
+                    <TextInput placeholder="Name" label='Name of Event' id="Name" onChange={(e)=>{setName(e.target.value)}} withAsterisk />
                     </td>
                     <td>
-                    <Select label='Type' defaultValue={'Numbers'} searchable data={['Once','Monthly','Yearly']}/>
+                    <Select label='Type' defaultValue={'Once'} value={frequency} onChange={(e)=>setFrequency(e)} searchable data={['Once','Monthly','Yearly']}/>
                     </td>
                 </tr>
                 <tr>
                     <td colSpan={3}>
-                    <center><Button id='add_button'>ADD</Button></center>
+                    <center><Button id='add_button'onClick={()=>{
+                        if(name!==''){
+                        axios.post('http://localhost:9000/event',{email:user.user,eventName:name,frequency,date,day:date.getDate(),month:date.getMonth()})
+                        .then((res)=>{setName('');setFrequency('Once');document.getElementById('Name').value=''})
+                        .catch((e)=>console.log('error'))}
+                        else{
+                            window.alert('Name is empty')
+                        }
+                    }}>ADD</Button></center>
                     </td>
                 </tr>
             </tbody>
@@ -44,8 +61,8 @@ function Event()
     {
         return(
             <div>
-            <h1>this is event content</h1>
-            <h1>{date.toLocaleDateString()}</h1>
+            <h3>Events on {date.toDateString()}</h3>
+            <h1>{date.getFullYear()}</h1>
             </div>
         )
     }
