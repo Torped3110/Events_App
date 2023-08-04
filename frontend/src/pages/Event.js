@@ -8,15 +8,31 @@ import {useSelector} from 'react-redux'
 
 function Event()
 {
+    const [days,setDays]=useState([])
+    const [data,setData]=useState([])
     const user = useSelector(state=>state.login)
     const [name,setName]=useState('')
     const [frequency,setFrequency]=useState('Once')
     const [date,setDate]=useState(new Date())
+
+    useEffect(()=>{
+        monthchange(user.user,date.getMonth(),date.getFullYear())
+    },[])
+
     useEffect(()=>{
         axios.post('http://localhost:9000/allevents',{email:user.user,date,day:date.getDate(),month:date.getMonth()})
-        .then((res)=>console.log(res.data))
+        .then((res)=>{
+        var d=[]
+         res.data.forEach(element => {
+            d.push(<h3>{element.eventName}</h3>)
+         });
+         if(d.length==0){
+            d.push(<h3>No Events</h3>)
+         }
+         setData(d)
+        })
         .catch((e)=>console.log('error',e))
-    },[date])
+    },[date,data,days])
 
     function modal()
     {
@@ -41,7 +57,7 @@ function Event()
                     <td colSpan={3}>
                     <center><Button id='add_button'onClick={()=>{
                         if(name!==''){
-                        axios.post('http://localhost:9000/event',{email:user.user,eventName:name,frequency,date,day:date.getDate(),month:date.getMonth()})
+                        axios.post('http://localhost:9000/event',{email:user.user,eventName:name,frequency,date,day:date.getDate(),month:date.getMonth(),year:date.getFullYear()})
                         .then((res)=>{setName('');setFrequency('Once');document.getElementById('Name').value=''})
                         .catch((e)=>console.log('error'))}
                         else{
@@ -62,9 +78,21 @@ function Event()
         return(
             <div>
             <h3>Events on {date.toDateString()}</h3>
-            <h1>{date.getFullYear()}</h1>
+            <div>
+                {data}
+            </div>
             </div>
         )
+    }
+
+    function monthchange(email,month,year)
+    {
+        axios.post('http://localhost:9000/month',{email,month,year})
+        .then((res)=>{setDays(res.data)
+        //console.log(days)
+    }
+        )
+        .catch((error)=>console.log('error'))
     }
     return(
         <div id="Event_Back">
@@ -73,11 +101,15 @@ function Event()
         <div >
             <Card id='calendar' withBorder>
         <DatePicker renderDay={(date)=>{const day=date.getDate();
-        return((day==1)?(
+        return((days.includes(day.toString()))?(
         <Avatar color='yellow' variant="filled" radius={20}>
         <div style={{color:'green' , fontSize:20}}>{day}<sup style={{color:'red',top:0,right:2,position:'absolute',fontSize:20}}><img style={{width:"1px",height:"1px"}} src="./check.png"/></sup></div></Avatar>) : (<div>{day}</div>)
     )}} 
-        defaultValue={new Date()} onChange={setDate} hideOutsideDates/>
+        defaultValue={date} onChange={setDate} 
+        onMonthSelect={(date)=>monthchange(user.user,date.getMonth(),date.getFullYear())}
+        onNextMonth={(date)=>monthchange(user.user,date.getMonth(),date.getFullYear())}
+        onPreviousMonth={(date)=>monthchange(user.user,date.getMonth(),date.getFullYear())}
+        hideOutsideDates/>
         </Card>
         </div>
         </center>

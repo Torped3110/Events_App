@@ -25,7 +25,12 @@ const Eventschema=new Schema({
     month:{
         type:String,
         require:true
+    },
+    year:{
+        type:String,
+        require:true
     }
+
 })
 
 const Event=mongoose.model('Event',Eventschema,'Event')

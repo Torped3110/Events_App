@@ -1,4 +1,4 @@
-import { Button, TextInput,Card } from "@mantine/core";
+import { Button, TextInput,Card, PasswordInput } from "@mantine/core";
 import React, { useState } from "react";
 import { login } from "../pages/actions";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ function Login()
                         <td><TextInput className="login_comp" placeholder="username/email" label='Username' onChange={(e)=>{setEmail(e.target.value)}}/></td>
                     </tr>
                     <tr>
-                        <td><TextInput className="login_comp" placeholder="password" label='Password' onChange={(e)=>{setPassword(e.target.value)}}/></td>
+                        <td><PasswordInput className="login_comp" placeholder="password" label='Password' onChange={(e)=>{setPassword(e.target.value)}}/></td>
                     </tr>
                     <tr>
                         <td><center><Button id='click' className='login_comp' onClick={()=>{

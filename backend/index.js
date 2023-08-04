@@ -19,5 +19,6 @@ app.post('/add',jsonParser,User.Useradd)
 app.post('/event',jsonParser,Event.AddEvent)
 app.post('/login',jsonParser,User.Logincheck)
 app.post('/allevents',jsonParser,Event.Allevents)
+app.post('/month',jsonParser,Event.month)
 
 app.listen(9000,(req,res)=>{console.log("Listening at 9000")})
