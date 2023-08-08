@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {DatePicker} from '@mantine/dates'
 import './Page.css'
+import Grid from "./list";
 import { Avatar, Button, Card, Select, TextInput } from "@mantine/core";
 import Modal_Control from "./Modal_Control";
 import axios from "axios";
 import {useSelector} from 'react-redux'
+import EventCard from "./card";
 
 function Event()
 {
@@ -24,7 +26,8 @@ function Event()
         .then((res)=>{
         var d=[]
          res.data.forEach(element => {
-            d.push(<h3>{element.eventName}</h3>)
+            //console.log(element._id)
+            d.push(<EventCard name={element.eventName} obj_id={element._id}/>)
          });
          if(d.length==0){
             d.push(<h3>No Events</h3>)
@@ -79,7 +82,7 @@ function Event()
             <div>
             <h3>Events on {date.toDateString()}</h3>
             <div>
-                {data}
+                <Grid>{data}</Grid>
             </div>
             </div>
         )

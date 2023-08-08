@@ -30,10 +30,9 @@ module.exports.Allevents = async function(req,res){
 
 module.exports.Deleteevent=async function(req,res){
     try{
-        var k=Event.find(req.body)
-        if(k!==null){
-        Event.deleteOne(req.body)
-        return res.status(200)}
+        var k=await Event.findByIdAndDelete(req.body._id)
+        if (k!=null)
+        return res.status(200)
         else
         return res.status(404)
 }

@@ -28,11 +28,21 @@ function Modal_Control({modal,content}) {
 
   return (
     <div style={{display:"flex",flexDirection:"column"}}>
-      <Button className="corner_button" onClick={handleOpen}>+ ADD</Button>
+      <table>
+      <tbody>
+      <tr style={{marginBottom:'20px'}}>
+      <td><Button style={{position:'relative' ,left:'85%',top:'10px'}} onClick={handleOpen}>+ ADD</Button></td>
+      </tr>
+      <tr>
+        <td>
       <div id='portal'>
         {Modal(modal)}
       </div>
       {content}
+      </td>
+      </tr>
+      </tbody>
+      </table>
       </div>
   );
 }

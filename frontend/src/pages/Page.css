@@ -107,3 +107,24 @@ tr,td{
 #Event_Back{
     background-image: url(party.jpg);
 }
+
+.Grid-Container{
+    display: grid;
+    grid-template-columns: repeat(3,2fr);
+    gap:16px;
+    width: 100%;
+}
+
+.Grid-Item{
+    background-color: bisque;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.table-cell{
+    text-align: center;
+}
+
+.Cart-icon:hover{
+    background-color: rgb(197, 193, 193);
+}
