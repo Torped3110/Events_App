@@ -16,7 +16,7 @@ function Bought()
     .then((res)=>{
         setList(res.data)})
     .catch((e)=>{console.log('Error',e)})
-    },[date])
+    })
     return(
         <div>
             <center style={{width:"fit-content"}}>

@@ -34,7 +34,7 @@ function Modal()
                     </tr>
                     {data.map((element)=>{
                         k++
-                        return(<tr>
+                        return(<tr key={k}>
                         <td className="table-cell">{k}</td>
                         <td className='table-cell'><h4>{element.name}</h4></td>
                         <td className='table-cell'>{element.quantity}</td>

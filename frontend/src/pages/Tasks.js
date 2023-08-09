@@ -2,13 +2,52 @@ import { Avatar, Button, Card, Select, TextInput } from "@mantine/core";
 import { DatePicker,MonthPickerInput } from "@mantine/dates";
 import React, { useEffect, useState } from "react";
 import Modal_Control from "./Modal_Control";
+import axios from 'axios'
+import {useSelector} from 'react-redux'
+import icon from './delete.ico'
+import icon2 from './check.ico'
+import Grid from "./list";
 
 function Tasks()
 {
     const [date,setDate]=useState(new Date())
+    const [name,setName]=useState('')
+    const User=useSelector(state=>state.login)
+    const [pending,setpending]=useState([])
+    const [completed,setCompleted]=useState([])
     useEffect(()=>{
-        console.log(date)
-    },[])
+        var pend=[]
+        var done=[]
+        axios.post('http://localhost:9000/alltask',{email:User.user,day:date.getDate(),month:date.getMonth(),year:date.getFullYear(),done:false})
+        .then((res)=>{
+            if(res.data!=null){
+                    var x=0
+                    res.data.forEach(element=>{
+                        x++;
+                        pend.push(<Card key={x}>
+                            {element.name}
+                            <img className="Cart-icon" src={icon2} style={{position:'absolute',right:'15px',cursor:'pointer'}}/>
+                            <img className="Cart-icon" src={icon} style={{position:'absolute',right:'60px',height:'30px',cursor:'pointer'}}/>
+                        </Card>)
+                    })}
+            setpending(pend)})
+        .catch((e)=>{console.log(e)})
+
+        axios.post('http://localhost:9000/alltask',{email:User.user,day:date.getDate(),month:date.getMonth(),year:date.getFullYear(),done:true})
+        .then((res)=>{
+            if(res.data!=null){
+                    var x=0
+                    res.data.forEach(element=>{
+                        x++;
+                        done.push(<Card key={x}>
+                            {element.name}
+                            <img className="Cart-icon" src={icon} style={{position:'absolute',right:'60px',height:'30px',cursor:'pointer'}}/>
+                        </Card>)
+                    })}
+            setCompleted(done)})
+        .catch((e)=>{console.log(e)})
+        
+    })
 
     function modal()
     {
@@ -22,13 +61,18 @@ function Tasks()
                 </tr>
                 <tr>
                     <td>
-                    <TextInput placeholder="Name" label='Name of Task' id="Name" withAsterisk />
+                    <TextInput placeholder="Name" label='Name of Task' id="Name" withAsterisk onChange={(e)=>{setName(e.target.value)}} />
                     </td>
                 </tr>
                 <tr>
                     <td colSpan={3}>
                     <center>
-                      <Button id='add_button'>ADD</Button></center>
+                      <Button id='add_button' onClick={()=>{axios.post('http://localhost:9000/task',{email:User.user,name,day:date.getDate(),month:date.getMonth(),year:date.getFullYear()})
+                      .then((res)=>{console.log(res)
+                        document.getElementById('Name').value=''
+                    })
+                        .catch((e)=>{console.log(e)})
+                    }}>ADD</Button></center>
                     </td>
                 </tr>
             </tbody>
@@ -42,8 +86,15 @@ function Tasks()
     {
         return(
             <div>
-            <h1>this is tasks content</h1>
-            <h1>{date.toLocaleDateString()}</h1>
+            <h1>Tasks</h1>
+             <Card withBorder style={{marginBottom:'10px',padding:0}}>
+                <h4>Pending Tasks</h4>
+                <Grid>{pending}</Grid>
+            </Card>
+            <Card withBorder>
+                <h4>Completed Tasks</h4>
+                <Grid>{completed}</Grid>
+            </Card>
             </div>
         )
     }
