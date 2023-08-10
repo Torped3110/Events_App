@@ -18,33 +18,45 @@ function Tasks()
     useEffect(()=>{
         var pend=[]
         var done=[]
-        axios.post('http://localhost:9000/alltask',{email:User.user,day:date.getDate(),month:date.getMonth(),year:date.getFullYear(),done:false})
+        axios.post('http://localhost:9000/alltask',{email:User.user,day:date.getDate(),month:date.getMonth(),year:date.getFullYear()})
         .then((res)=>{
-            if(res.data!=null){
+          //console.log(res.data)
+            if(res.data[0]!=null){
                     var x=0
-                    res.data.forEach(element=>{
+                    res.data[0].forEach(element=>{
                         x++;
                         pend.push(<Card key={x}>
                             {element.name}
-                            <img className="Cart-icon" src={icon2} style={{position:'absolute',right:'15px',cursor:'pointer'}}/>
-                            <img className="Cart-icon" src={icon} style={{position:'absolute',right:'60px',height:'30px',cursor:'pointer'}}/>
+                            <img className="Cart-icon" src={icon2} onClick={()=>{
+                                axios.post('http://localhost:9000/ticktask',{_id:element._id})
+                                .then((res)=>(console.log(res)))
+                                .catch((e)=>{console.log(e)})
+                            }} style={{position:'absolute',right:'15px',cursor:'pointer'}}/>
+                            <img className="Cart-icon" src={icon} onClick={()=>{
+                                axios.post('http://localhost:9000/deletetask',{_id:element._id})
+                                .then((res)=>(console.log(res)))
+                                .catch((e)=>{console.log(e)})
+                            }} style={{position:'absolute',right:'60px',height:'30px',cursor:'pointer'}}/>
                         </Card>)
                     })}
-            setpending(pend)})
-        .catch((e)=>{console.log(e)})
-
-        axios.post('http://localhost:9000/alltask',{email:User.user,day:date.getDate(),month:date.getMonth(),year:date.getFullYear(),done:true})
-        .then((res)=>{
-            if(res.data!=null){
-                    var x=0
-                    res.data.forEach(element=>{
-                        x++;
-                        done.push(<Card key={x}>
-                            {element.name}
-                            <img className="Cart-icon" src={icon} style={{position:'absolute',right:'60px',height:'30px',cursor:'pointer'}}/>
-                        </Card>)
-                    })}
-            setCompleted(done)})
+            setpending(pend)
+        
+            if(res.data[1]!=null){
+                var x=0
+                res.data[1].forEach(element=>{
+                    x++;
+                    done.push(<Card key={x}>
+                        {element.name}
+                        <img className="Cart-icon" src={icon} onClick={()=>{
+                                axios.post('http://localhost:9000/deletetask',{_id:element._id})
+                                .then((res)=>(console.log(res)))
+                                .catch((e)=>{console.log(e)})
+                            }} style={{position:'absolute',right:'10px',height:'30px',cursor:'pointer'}}/>
+                    </Card>)
+                })}
+        setCompleted(done)
+        
+        })
         .catch((e)=>{console.log(e)})
         
     })
@@ -87,7 +99,7 @@ function Tasks()
         return(
             <div>
             <h1>Tasks</h1>
-             <Card withBorder style={{marginBottom:'10px',padding:0}}>
+             <Card withBorder style={{marginBottom:'10px'}}>
                 <h4>Pending Tasks</h4>
                 <Grid>{pending}</Grid>
             </Card>
@@ -105,7 +117,7 @@ function Tasks()
         <div >
             <Card id='calendar' withBorder>
         <DatePicker renderDay={(date)=>{const day=date.getDate();
-        return((day==1)?(
+        return((day==0)?(
         <Avatar color='yellow' variant="filled" radius={20}>
         <div style={{color:'green' , fontSize:20}}>{day}<sup style={{color:'red',top:0,right:2,position:'absolute',fontSize:20}}><img style={{width:"1px",height:"1px"}} src="./check.png"/></sup></div></Avatar>) : (<div>{day}</div>)
     )}} 
